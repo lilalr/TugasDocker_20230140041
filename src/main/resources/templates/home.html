@@ -3,32 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 30px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 { color: #333; margin-bottom: 6px; }
+        p { color: #666; margin-bottom: 16px; }
+        a.btn-add {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #4a90e2;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        a.btn-add:hover { background: #357abd; }
+        h3 { color: #333; margin-bottom: 12px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background: #4a90e2;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        tr:hover td { background: #f9f9f9; }
+        a.logout {
+            color: #e74c3c;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        a.logout:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-<h2>MY Website 20230140041</h2>
-<p>Selamat datang di aplikasi!</p>
-<a th:href="@{/form}">+ Input Data Mahasiswa</a>
+<div class="container">
+    <h2>MY Website 20230140041</h2>
+    <p>Selamat datang di aplikasi!</p>
+    <a class="btn-add" th:href="@{/form}">+ Input Data Mahasiswa</a>
 
-<h3>Data Mahasiswa</h3>
-<table border="1" width="100%">
-    <tr style="background-color:blue; color:white;">
-        <th>No</th>
-        <th>Nama</th>
-        <th>NIM</th>
-        <th>Jenis Kelamin</th>
-    </tr>
-    <tr th:if="${#lists.isEmpty(listMahasiswa)}">
-        <td colspan="4" align="center">Belum ada data</td>
-    </tr>
-    <tr th:each="mhs, i : ${listMahasiswa}">
-        <td th:text="${i.count}"></td>
-        <td th:text="${mhs.nama}"></td>
-        <td th:text="${mhs.nim}"></td>
-        <td th:text="${mhs.jenisKelamin}"></td>
-    </tr>
-</table>
+    <h3>Data Mahasiswa</h3>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Jenis Kelamin</th>
+        </tr>
+        <tr th:if="${#lists.isEmpty(listMahasiswa)}">
+            <td colspan="4">Belum ada data</td>
+        </tr>
+        <tr th:each="mhs, i : ${listMahasiswa}">
+            <td th:text="${i.count}"></td>
+            <td th:text="${mhs.nama}"></td>
+            <td th:text="${mhs.nim}"></td>
+            <td th:text="${mhs.jenisKelamin}"></td>
+        </tr>
+    </table>
 
-<br>
-<a href="/logout">Logout</a>
+    <a class="logout" href="/logout">Logout</a>
+</div>
 </body>
 </html>
